@@ -10,13 +10,13 @@ namespace Laboratorium3___Employee.Controllers
 
         public IActionResult Index()
         {
-            return View(employees);
+            return View(employees.Values.ToList());
         }
 
         [HttpGet]
         public IActionResult Create()
         {
-            return View(new Employee());
+            return View();
         }
 
         [HttpPost]
