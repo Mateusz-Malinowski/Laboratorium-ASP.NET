@@ -1,0 +1,36 @@
+﻿@model Dictionary<int, Employee>
+@*
+    For more information on enabling MVC for empty projects, visit https://go.microsoft.com/fwlink/?LinkID=397860
+*@
+@{
+}
+<h2>Employee List</h2>
+<a class="btn btn-primary" asp-controller="Employee" asp-action="Create">Add employee</a>
+
+<table class="table">
+    <tr>
+        <th>Name</th>
+        <th>Surname</th>
+        <th>Pesel</th>
+        <th>Position</th>
+        <th>Department</th>
+        <th>EmploymentDate</th>
+        <th>Actions</th>
+    </tr>
+    @foreach(var item in Model)
+    {
+        <tr>
+            <td>@item.Value.Name</td>
+            <td>@item.Value.Surname</td>
+            <td>@item.Value.Pesel</td>
+            <td>@item.Value.Position</td>
+            <td>@item.Value.Department</td>
+            <td>@item.Value.EmploymentDate</td>
+            <td>
+                <a asp-controller="Employee" asp-action="Details" asp-route-id="@item.Value.Id" class="btn btn-primary">Details</a>
+                <a asp-controller="Employee" asp-action="Update" asp-route-id="@item.Value.Id" class="btn btn-outline-info">Update</a>
+                <a asp-controller="Employee" asp-action="Delete" asp-route-id="@item.Value.Id" class="btn btn-danger">Delete</a>
+            </td>
+        </tr>
+    }
+</table>
