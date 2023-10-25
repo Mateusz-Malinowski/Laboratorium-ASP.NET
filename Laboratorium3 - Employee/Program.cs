@@ -1,7 +1,10 @@
+using Laboratorium3___Employee.Models;
+
 var builder = WebApplication.CreateBuilder(args);
 
 // Add services to the container.
 builder.Services.AddControllersWithViews();
+builder.Services.AddSingleton<IEmployeeService, MemoryEmployeeService>();
 
 var app = builder.Build();
 

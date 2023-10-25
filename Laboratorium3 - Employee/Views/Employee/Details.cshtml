@@ -7,9 +7,10 @@
 
 <h2>Employee @Model.Name @Model.Surname (id: @Model.Id)</h2>
 <ul>
-    <li><b>PESEL:</b> @Model.Pesel</li>
-    <li><b>Position:</b> @(Model.Position)</li>
-    <li><b>Department:</b> @(Model.Department)</li>
-    <li><b>Employment date:</b> @(Model.EmploymentDate)</li>
+    <li><b>@Html.DisplayNameFor(model => model.Pesel):</b> @Model.Pesel</li>
+    <li><b>@Html.DisplayNameFor(model => model.Position):</b> @Model.Position.GetDisplayName()</li>
+    <li><b>@Html.DisplayNameFor(model => model.Department):</b> @Model.Department.GetDisplayName()</li>
+    <li><b>@Html.DisplayNameFor(model => model.EmploymentDate):</b> @Model.EmploymentDate</li>
+    <li><b>@Html.DisplayNameFor(model => model.SackingDate):</b> @Model.SackingDate</li>
 </ul>
 <a asp-action="Index" class="btn btn-primary">Go back to list</a>

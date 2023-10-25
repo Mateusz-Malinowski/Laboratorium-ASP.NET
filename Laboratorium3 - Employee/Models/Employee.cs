@@ -19,13 +19,11 @@ namespace Laboratorium3___Employee.Models
 
         public string Surname { get; set; }
 
-        [Display(Name = "Stanowisko")]
         public Positions Position { get; set; }
 
-        [Display(Name = "Oddział")]
         public Departments Department { get; set; }
 
-        [Display(Name="Employment date")]
+        [Display(Name = "Employment date")]
         public DateTime? EmploymentDate { get; set; }
 
         [Display(Name = "Sacking date")]
