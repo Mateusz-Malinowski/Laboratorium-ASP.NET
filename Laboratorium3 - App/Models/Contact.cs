@@ -7,18 +7,24 @@ namespace Laboratorium3___App.Models
     {
         [HiddenInput]
         public int Id { get; set; }
+
         [HiddenInput]
         public DateTime Created { get; set; }
+
         [Required(ErrorMessage = "You must specify the name!")]
         [StringLength(maximumLength: 50, ErrorMessage = "Too long name, max 50 chars")]
         [Display(Name = "Name")]
         public string Name { get; set; }
+
         [EmailAddress]
         [Display(Name = "E-mail")]
         public string Email { get; set; }
+
         public string? Phone { get; set; }
+
         [Display(Name = "Date of birth")]
         public DateTime? Birth { get; set; }
+
         [Display(Name = "Priorytet")]
         public Priority Priority { get; set; }
     }

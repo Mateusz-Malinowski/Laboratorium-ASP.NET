@@ -1,10 +1,12 @@
+using Data;
 using Laboratorium3___Employee.Models;
 
 var builder = WebApplication.CreateBuilder(args);
 
 // Add services to the container.
 builder.Services.AddControllersWithViews();
-builder.Services.AddSingleton<IEmployeeService, MemoryEmployeeService>();
+builder.Services.AddDbContext<AppDbContext>();
+builder.Services.AddTransient<IEmployeeService, EFEmployeeService>();
 
 var app = builder.Build();
 
