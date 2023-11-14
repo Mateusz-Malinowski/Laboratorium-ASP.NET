@@ -46,5 +46,10 @@ namespace Laboratorium3___App.Models
             context.Contacts.Update(ContactMapper.GetEntityFromModel(contact));
             context.SaveChanges();
         }
+
+        public List<OrganizationEntity> FindAllOrganizations()
+        {
+            return context.Organizations.ToList();
+        }
     }
 }

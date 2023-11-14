@@ -13,6 +13,7 @@ namespace Laboratorium3___App.Models
                 Email = contact.Email,
                 Phone = contact.Phone,
                 Birth = contact.Birth,
+                OrganizationId = contact.OrganizationId,
                 Priority = (int)contact.Priority
             };
         }
@@ -26,6 +27,7 @@ namespace Laboratorium3___App.Models
                 Email = entity.Email,
                 Phone = entity.Phone,
                 Birth = entity.Birth,
+                OrganizationId = entity.OrganizationId,
                 Priority = (Priority)entity.Priority
             };
         }
