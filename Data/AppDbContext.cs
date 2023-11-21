@@ -1,4 +1,6 @@
 ﻿using Data.Entities;
+using Microsoft.AspNetCore.Identity;
+using Microsoft.AspNetCore.Identity.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore;
 using System;
 using System.Collections.Generic;
@@ -8,7 +10,7 @@ using System.Threading.Tasks;
 
 namespace Data
 {
-    public class AppDbContext : DbContext
+    public class AppDbContext : IdentityDbContext<IdentityUser>
     {
         public DbSet<ContactEntity> Contacts { get; set; }
         public DbSet<EmployeeEntity> Employees { get; set; }
@@ -28,6 +30,34 @@ namespace Data
 
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {
+            base.OnModelCreating(modelBuilder);
+
+            var adminRole = new IdentityRole() { Name = "admin", NormalizedName = "ADMIN", Id = Guid.NewGuid().ToString() };
+            adminRole.ConcurrencyStamp = adminRole.Id;
+            var userRole = new IdentityRole() { Name = "user", NormalizedName = "USER", Id = Guid.NewGuid().ToString() };
+            userRole.ConcurrencyStamp = userRole.Id;
+
+            modelBuilder.Entity<IdentityRole>().HasData(
+                adminRole,
+                userRole
+            );
+
+            var hash = new PasswordHasher<IdentityUser>();
+            var adminUser = new IdentityUser() { UserName = "adam", NormalizedUserName = "ADAM", Email = "adam@wsei.edu.pl", NormalizedEmail = "ADAM@WSEI.EDU>PL", EmailConfirmed = true, Id = Guid.NewGuid().ToString() };
+            var normalUser = new IdentityUser() { UserName = "marcin", NormalizedUserName = "MARCIN", Email = "marcin@wsei.edu.pl", NormalizedEmail = "MARCIN@WSEI.EDU>PL", EmailConfirmed = true, Id = Guid.NewGuid().ToString() };
+            adminUser.PasswordHash = hash.HashPassword(adminUser, "1234ABCDabcd!@#$");
+            normalUser.PasswordHash = hash.HashPassword(normalUser, "1234ABCDabcd!@#$");
+
+            modelBuilder.Entity<IdentityUser>().HasData(
+                adminUser,
+                normalUser
+            );
+
+            modelBuilder.Entity<IdentityUserRole<string>>().HasData(
+                new IdentityUserRole<string>() { RoleId = adminRole.Id, UserId = adminUser.Id },
+                new IdentityUserRole<string>() { RoleId = userRole.Id, UserId = normalUser.Id }
+            );
+
             modelBuilder.Entity<ContactEntity>()
                 .HasOne(contact => contact.Organization)
                 .WithMany(organization => organization.Contacts)
