@@ -45,5 +45,10 @@ namespace Laboratorium3___App.Models
         {
             throw new Exception();
         }
+        public PagingList<Contact> FindPage(int page, int size)
+        {
+            throw new Exception();
+        }
+
     }
 }

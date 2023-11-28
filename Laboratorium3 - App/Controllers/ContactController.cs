@@ -5,7 +5,6 @@ using Microsoft.AspNetCore.Authorization;
 
 namespace Laboratorium3___App.Controllers
 {
-    [Authorize]
     public class ContactController : Controller
     {
         private readonly IContactService _contactService;
@@ -22,9 +21,33 @@ namespace Laboratorium3___App.Controllers
         }
 
         [HttpGet]
+        public IActionResult PagedIndex(int page = 1, int size = 2)
+        {
+            return View(_contactService.FindPage(page, size));
+        }
+
+        [HttpGet]
         public IActionResult Create()
         {
             return View(new Contact() { OrganizationList = CreateSelectListItem() });
+        }
+
+        [HttpGet]
+        public IActionResult CreateApi()
+        {
+            return View();
+        }
+        
+        [HttpPost]
+        public IActionResult CreateApi(Contact model)
+        {
+            if (ModelState.IsValid) // validation of "Contact model"
+            {
+                _contactService.Add(model);
+                return RedirectToAction("Index");
+            }
+
+            return View(model); // show form again - with errors
         }
 
         [HttpPost]
