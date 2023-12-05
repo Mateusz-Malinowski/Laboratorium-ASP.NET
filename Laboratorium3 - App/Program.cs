@@ -36,6 +36,7 @@ namespace Laboratorium3___App
             app.UseStaticFiles();
 
             app.UseRouting();
+            app.UseMiddleware<LastVisitCookie>();
             app.UseAuthentication();
             app.UseAuthorization();
             app.UseSession();
