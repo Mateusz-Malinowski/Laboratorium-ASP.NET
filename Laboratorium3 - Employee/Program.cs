@@ -1,5 +1,5 @@
 using Data;
-using Laboratorium3___Employee.Models;
+using Laboratorium3___Employee.Services;
 
 var builder = WebApplication.CreateBuilder(args);
 
@@ -7,6 +7,7 @@ var builder = WebApplication.CreateBuilder(args);
 builder.Services.AddControllersWithViews();
 builder.Services.AddDbContext<AppDbContext>();
 builder.Services.AddTransient<IEmployeeService, EFEmployeeService>();
+builder.Services.AddTransient<IDepartmentService, EFDepartmentService>();
 
 var app = builder.Build();
 

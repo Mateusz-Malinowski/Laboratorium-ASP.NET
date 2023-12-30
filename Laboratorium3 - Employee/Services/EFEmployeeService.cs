@@ -1,7 +1,9 @@
 ﻿using Data.Entities;
 using Data;
+using Laboratorium3___Employee.Models;
+using Laboratorium3___Employee.Helpers;
 
-namespace Laboratorium3___Employee.Models
+namespace Laboratorium3___Employee.Services
 {
     public class EFEmployeeService : IEmployeeService
     {
@@ -15,6 +17,7 @@ namespace Laboratorium3___Employee.Models
         public int Add(Employee employee)
         {
             var entry = context.Employees.Add(EmployeeMapper.GetEntityFromModel(employee));
+            Console.WriteLine(employee.DepartmentId);
             context.SaveChanges();
             int id = entry.Entity.EmployeeId;
             return id;
@@ -45,6 +48,11 @@ namespace Laboratorium3___Employee.Models
         {
             context.Employees.Update(EmployeeMapper.GetEntityFromModel(employee));
             context.SaveChanges();
+        }
+
+        public List<DepartmentEntity> FindAllDepartments()
+        {
+            return context.Departments.ToList();
         }
     }
 }

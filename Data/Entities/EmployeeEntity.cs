@@ -30,8 +30,9 @@ namespace Data.Entities
         [Required]
         public int Position { get; set; }
 
-        [Required]
-        public int Department { get; set; }
+        public DepartmentEntity Department { get; set; }
+
+        public int DepartmentId { get; set; }
 
         public DateTime? EmploymentDate { get; set; }
 

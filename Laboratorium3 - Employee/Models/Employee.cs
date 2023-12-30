@@ -1,4 +1,7 @@
-﻿using Microsoft.AspNetCore.Mvc;
+﻿using Data.Entities;
+using Microsoft.AspNetCore.Mvc;
+using Microsoft.AspNetCore.Mvc.ModelBinding.Validation;
+using Microsoft.AspNetCore.Mvc.Rendering;
 using System.ComponentModel.DataAnnotations;
 
 namespace Laboratorium3___Employee.Models
@@ -20,7 +23,14 @@ namespace Laboratorium3___Employee.Models
 
         public Positions Position { get; set; }
 
-        public Departments Department { get; set; }
+        [Display(Name = "Department")]
+        public int DepartmentId { get; set; }
+
+        [ValidateNever]
+        public List<SelectListItem>? DepartmentList { get; set; }
+
+        [ValidateNever]
+        public Department? Department { get; set; }
 
         [Display(Name = "Employment date")]
         public DateTime? EmploymentDate { get; set; }

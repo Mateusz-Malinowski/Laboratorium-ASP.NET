@@ -29,9 +29,10 @@
         <span asp-validation-for="Position" class="text-danger"></span>
     </div>
     <div class="mb-3">
-        <label asp-for="Department"></label>
-        <select asp-for="Department" class="form-control" asp-items="@Html.GetEnumSelectList<Departments>()"></select>
-        <span asp-validation-for="Department" class="text-danger"></span>
+        <label asp-for="DepartmentId"></label>
+        <input class="form-control" type="text" id="filter" />
+        <select asp-for="DepartmentId" class="form-control" id="DepartmentId"></select>
+        <a asp-action="Create" asp-controller="Department">Add new department</a>
     </div>
     <div class="mb-3">
         <label asp-for="EmploymentDate"></label>
@@ -46,3 +47,37 @@
     <button type="submit" class="btn btn-primary">Update</button>
     <button type="reset" class="btn btn-secondary">Clear</button>
 </form>
+
+@section Scripts {
+    <script>
+        const select = document.querySelector('#DepartmentId');
+        const filter = document.querySelector('#filter');
+
+        fetch(`/api/departments`)
+            .then(response => response.json())
+            .then(departments => {
+                for (const department of departments) {
+                    const option = document.createElement('option');
+                    option.setAttribute('value', department.id);
+                    option.innerText = department.name;
+                    select.appendChild(option);
+                }
+
+                select.value = @Model.DepartmentId;
+            });
+
+        filter.oninput = function () {
+            select.innerHTML = "";
+            fetch(`/api/departments?name=${filter.value}`)
+                .then(response => response.json())
+                .then(departments => {
+                    for (const department of departments) {
+                        const option = document.createElement('option');
+                        option.setAttribute('value', department.id);
+                        option.innerText = department.name;
+                        select.appendChild(option);
+                    }
+                });
+        }
+    </script>
+}

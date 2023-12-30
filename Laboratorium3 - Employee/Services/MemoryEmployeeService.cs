@@ -1,4 +1,7 @@
-﻿namespace Laboratorium3___Employee.Models
+﻿using Data.Entities;
+using Laboratorium3___Employee.Models;
+
+namespace Laboratorium3___Employee.Services
 {
     public class MemoryEmployeeService : IEmployeeService
     {
@@ -30,6 +33,11 @@
         public void Update(Employee item)
         {
             _items[item.Id] = item;
+        }
+
+        public List<DepartmentEntity> FindAllDepartments()
+        {
+            throw new NotImplementedException();
         }
     }
 }

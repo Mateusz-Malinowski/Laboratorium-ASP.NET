@@ -3,6 +3,7 @@ using System;
 using Data;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 
 #nullable disable
@@ -10,9 +11,11 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace Data.Migrations
 {
     [DbContext(typeof(AppDbContext))]
-    partial class AppDbContextModelSnapshot : ModelSnapshot
+    [Migration("20231230133257_InitialCreate")]
+    partial class InitialCreate
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        /// <inheritdoc />
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder.HasAnnotation("ProductVersion", "7.0.13");
@@ -74,39 +77,6 @@ namespace Data.Migrations
                         });
                 });
 
-            modelBuilder.Entity("Data.Entities.DepartmentEntity", b =>
-                {
-                    b.Property<int>("Id")
-                        .ValueGeneratedOnAdd()
-                        .HasColumnType("INTEGER");
-
-                    b.Property<string>("Description")
-                        .IsRequired()
-                        .HasColumnType("TEXT");
-
-                    b.Property<string>("Name")
-                        .IsRequired()
-                        .HasColumnType("TEXT");
-
-                    b.HasKey("Id");
-
-                    b.ToTable("departments");
-
-                    b.HasData(
-                        new
-                        {
-                            Id = 1,
-                            Description = "Pierwszy oddział",
-                            Name = "Kraków Łagiewniki"
-                        },
-                        new
-                        {
-                            Id = 2,
-                            Description = "Największy oddział",
-                            Name = "Warszawa Ursynów"
-                        });
-                });
-
             modelBuilder.Entity("Data.Entities.EmployeeEntity", b =>
                 {
                     b.Property<int>("EmployeeId")
@@ -114,7 +84,7 @@ namespace Data.Migrations
                         .HasColumnType("INTEGER")
                         .HasColumnName("id");
 
-                    b.Property<int>("DepartmentId")
+                    b.Property<int>("Department")
                         .HasColumnType("INTEGER");
 
                     b.Property<DateTime?>("EmploymentDate")
@@ -143,15 +113,13 @@ namespace Data.Migrations
 
                     b.HasKey("EmployeeId");
 
-                    b.HasIndex("DepartmentId");
-
                     b.ToTable("employees");
 
                     b.HasData(
                         new
                         {
                             EmployeeId = 1,
-                            DepartmentId = 1,
+                            Department = 0,
                             EmploymentDate = new DateTime(2000, 10, 10, 0, 0, 0, 0, DateTimeKind.Unspecified),
                             Name = "Adam",
                             Pesel = "12345678900",
@@ -162,7 +130,7 @@ namespace Data.Migrations
                         new
                         {
                             EmployeeId = 2,
-                            DepartmentId = 2,
+                            Department = 1,
                             EmploymentDate = new DateTime(1999, 8, 10, 0, 0, 0, 0, DateTimeKind.Unspecified),
                             Name = "Ewa",
                             Pesel = "00987654321",
@@ -233,15 +201,15 @@ namespace Data.Migrations
                     b.HasData(
                         new
                         {
-                            Id = "f70c9bc6-b96f-47ef-8eb3-c5dfcda82e56",
-                            ConcurrencyStamp = "f70c9bc6-b96f-47ef-8eb3-c5dfcda82e56",
+                            Id = "e6d0b075-7659-4da7-b123-a173198f044e",
+                            ConcurrencyStamp = "e6d0b075-7659-4da7-b123-a173198f044e",
                             Name = "admin",
                             NormalizedName = "ADMIN"
                         },
                         new
                         {
-                            Id = "5c954f63-f266-4e5c-a80e-52e9508b8aae",
-                            ConcurrencyStamp = "5c954f63-f266-4e5c-a80e-52e9508b8aae",
+                            Id = "33232789-99ff-42a1-af61-df1f8474c253",
+                            ConcurrencyStamp = "33232789-99ff-42a1-af61-df1f8474c253",
                             Name = "user",
                             NormalizedName = "USER"
                         });
@@ -336,33 +304,33 @@ namespace Data.Migrations
                     b.HasData(
                         new
                         {
-                            Id = "d820b101-63f3-420b-a800-1dae29d73335",
+                            Id = "3e04dccf-fc6a-4ce8-9a3d-64bc8c56b514",
                             AccessFailedCount = 0,
-                            ConcurrencyStamp = "8faecabb-d28e-4b32-8bf0-238b740db317",
+                            ConcurrencyStamp = "8eccb950-0312-4cd4-94b6-9e33add24b18",
                             Email = "adam@wsei.edu.pl",
                             EmailConfirmed = true,
                             LockoutEnabled = false,
                             NormalizedEmail = "ADAM@WSEI.EDU>PL",
                             NormalizedUserName = "ADAM",
-                            PasswordHash = "AQAAAAEAACcQAAAAEP16HvE5P0K6h7mFfXorl8SYyPDU2FoQ8tf05Rzrfd7sMrZiq0T51AETxniF3lUiuQ==",
+                            PasswordHash = "AQAAAAEAACcQAAAAEOoPZH2jfUL5hYKYT9wU/igDNHs3qy5gAyxR60zXyeGbrNZ9LBZhUyItsKW+9WGspQ==",
                             PhoneNumberConfirmed = false,
-                            SecurityStamp = "b1ad1765-69d3-415d-8f43-06ea331cc2eb",
+                            SecurityStamp = "0895e504-b39e-4171-8ce8-54b9f28566fd",
                             TwoFactorEnabled = false,
                             UserName = "adam"
                         },
                         new
                         {
-                            Id = "397d59d6-3cdc-49af-97a0-399ae3ad27f2",
+                            Id = "615ef445-80f5-4919-af5c-494977779681",
                             AccessFailedCount = 0,
-                            ConcurrencyStamp = "f4b96a7c-ad8c-4dcf-b173-2cf78dbe671a",
+                            ConcurrencyStamp = "ce663a27-797a-4c38-88d1-450c36e2e638",
                             Email = "marcin@wsei.edu.pl",
                             EmailConfirmed = true,
                             LockoutEnabled = false,
                             NormalizedEmail = "MARCIN@WSEI.EDU>PL",
                             NormalizedUserName = "MARCIN",
-                            PasswordHash = "AQAAAAEAACcQAAAAEGzvkGOdP9Sb08qw8HLnSNuTsPRaKWQFQ3t1hw0Rh5rhvH9ooJvq40SpqL8KFh/PBw==",
+                            PasswordHash = "AQAAAAEAACcQAAAAEKFMa1id0C3pwOQhvLNPgr+LS4hCkmUTWQNuC8b7rVUCBAUd+SC4QHb1XpuppgXquw==",
                             PhoneNumberConfirmed = false,
-                            SecurityStamp = "01e47174-8799-442f-9c45-68c9b75514f0",
+                            SecurityStamp = "89f2c75e-f94b-4cf8-8b4e-ddbce849153c",
                             TwoFactorEnabled = false,
                             UserName = "marcin"
                         });
@@ -430,13 +398,13 @@ namespace Data.Migrations
                     b.HasData(
                         new
                         {
-                            UserId = "d820b101-63f3-420b-a800-1dae29d73335",
-                            RoleId = "f70c9bc6-b96f-47ef-8eb3-c5dfcda82e56"
+                            UserId = "3e04dccf-fc6a-4ce8-9a3d-64bc8c56b514",
+                            RoleId = "e6d0b075-7659-4da7-b123-a173198f044e"
                         },
                         new
                         {
-                            UserId = "397d59d6-3cdc-49af-97a0-399ae3ad27f2",
-                            RoleId = "5c954f63-f266-4e5c-a80e-52e9508b8aae"
+                            UserId = "615ef445-80f5-4919-af5c-494977779681",
+                            RoleId = "33232789-99ff-42a1-af61-df1f8474c253"
                         });
                 });
 
@@ -466,64 +434,6 @@ namespace Data.Migrations
                         .HasForeignKey("OrganizationId");
 
                     b.Navigation("Organization");
-                });
-
-            modelBuilder.Entity("Data.Entities.DepartmentEntity", b =>
-                {
-                    b.OwnsOne("Data.Models.Address", "Address", b1 =>
-                        {
-                            b1.Property<int>("DepartmentEntityId")
-                                .HasColumnType("INTEGER");
-
-                            b1.Property<string>("City")
-                                .IsRequired()
-                                .HasColumnType("TEXT");
-
-                            b1.Property<string>("PostalCode")
-                                .IsRequired()
-                                .HasColumnType("TEXT");
-
-                            b1.Property<string>("Street")
-                                .IsRequired()
-                                .HasColumnType("TEXT");
-
-                            b1.HasKey("DepartmentEntityId");
-
-                            b1.ToTable("departments");
-
-                            b1.WithOwner()
-                                .HasForeignKey("DepartmentEntityId");
-
-                            b1.HasData(
-                                new
-                                {
-                                    DepartmentEntityId = 1,
-                                    City = "Kraków",
-                                    PostalCode = "31-150",
-                                    Street = "Wesoła 90A"
-                                },
-                                new
-                                {
-                                    DepartmentEntityId = 2,
-                                    City = "Warszawa",
-                                    PostalCode = "31-699",
-                                    Street = "Słoneczna 84B"
-                                });
-                        });
-
-                    b.Navigation("Address")
-                        .IsRequired();
-                });
-
-            modelBuilder.Entity("Data.Entities.EmployeeEntity", b =>
-                {
-                    b.HasOne("Data.Entities.DepartmentEntity", "Department")
-                        .WithMany("Employees")
-                        .HasForeignKey("DepartmentId")
-                        .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired();
-
-                    b.Navigation("Department");
                 });
 
             modelBuilder.Entity("Data.Entities.OrganizationEntity", b =>
@@ -622,11 +532,6 @@ namespace Data.Migrations
                         .HasForeignKey("UserId")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
-                });
-
-            modelBuilder.Entity("Data.Entities.DepartmentEntity", b =>
-                {
-                    b.Navigation("Employees");
                 });
 
             modelBuilder.Entity("Data.Entities.OrganizationEntity", b =>
