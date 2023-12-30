@@ -21,16 +21,20 @@ namespace Laboratorium3___Employee.Models
         [StringLength(maximumLength: 80, ErrorMessage = "Too long surname, max 80 characters are allowed!")]
         public string Surname { get; set; }
 
-        public Positions Position { get; set; }
+        [Display(Name = "Position")]
+        public int PositionId { get; set; }
 
         [Display(Name = "Department")]
         public int DepartmentId { get; set; }
 
         [ValidateNever]
-        public List<SelectListItem>? DepartmentList { get; set; }
+        public Position? Position { get; set; }
 
         [ValidateNever]
         public Department? Department { get; set; }
+
+        [ValidateNever]
+        public List<SelectListItem>? PositionList { get; set; }
 
         [Display(Name = "Employment date")]
         public DateTime? EmploymentDate { get; set; }

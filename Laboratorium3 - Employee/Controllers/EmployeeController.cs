@@ -9,24 +9,30 @@ namespace Laboratorium3___Employee.Controllers
     {
         private readonly IEmployeeService _employeeService;
         private readonly IDepartmentService _departmentService;
+        private readonly IPositionService _positionService;
 
-        public EmployeeController(IEmployeeService employeeService, IDepartmentService departmentService)
+        public EmployeeController(IEmployeeService employeeService, IDepartmentService departmentService, IPositionService positionService)
         {
             _employeeService = employeeService;
             _departmentService = departmentService;
+            _positionService = positionService;
         }
 
         public IActionResult Index()
         {
             var employees = _employeeService.FindAll();
-            foreach (Employee employee in employees) employee.Department = _departmentService.FindById(employee.DepartmentId);
+            foreach (Employee employee in employees)
+            {
+                employee.Position = _positionService.FindById(employee.PositionId);
+                employee.Department = _departmentService.FindById(employee.DepartmentId);
+            }
             return View(employees);
         }
 
         [HttpGet]
         public IActionResult Create()
         {
-            return View(new Employee() { DepartmentList = CreateDepartmentsSelectListItem() });
+            return View(new Employee() { PositionList = CreatePositionSelectListItems() });
         }
 
         [HttpPost]
@@ -38,7 +44,7 @@ namespace Laboratorium3___Employee.Controllers
                 return RedirectToAction("Index");
             }
 
-            model.DepartmentList = CreateDepartmentsSelectListItem();
+            model.PositionList = CreatePositionSelectListItems();
             return View(model); // show form again - with errors
         }
 
@@ -47,7 +53,7 @@ namespace Laboratorium3___Employee.Controllers
         {
             var employee = _employeeService.FindById(id);
             if (employee is null) return NotFound();
-            employee.DepartmentList = CreateDepartmentsSelectListItem();
+            employee.PositionList = CreatePositionSelectListItems();
             return View(employee);
         }
 
@@ -60,7 +66,7 @@ namespace Laboratorium3___Employee.Controllers
                 return RedirectToAction("Index");
             }
 
-            model.DepartmentList = CreateDepartmentsSelectListItem();
+            model.PositionList = CreatePositionSelectListItems();
             return View(model);
         }
 
@@ -84,19 +90,19 @@ namespace Laboratorium3___Employee.Controllers
         {
             var employee = _employeeService.FindById(id);
             if (employee is null) return NotFound();
+            employee.Position = _positionService.FindById(employee.PositionId);
             employee.Department = _departmentService.FindById(employee.DepartmentId);
             return View(employee);
         }
 
-        private List<SelectListItem> CreateDepartmentsSelectListItem()
+        private List<SelectListItem> CreatePositionSelectListItems()
         {
-            var items = _employeeService.FindAllDepartments()
+            var items = _positionService.FindAll()
                           .Select(e => new SelectListItem()
                           {
                               Text = e.Name,
                               Value = e.Id.ToString()
                           }).ToList();
-            items.Add(new SelectListItem() { Text = "Unknown", Value = "" });
             return items;
         }
     }

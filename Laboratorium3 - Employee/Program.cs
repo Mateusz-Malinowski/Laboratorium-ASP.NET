@@ -8,6 +8,7 @@ builder.Services.AddControllersWithViews();
 builder.Services.AddDbContext<AppDbContext>();
 builder.Services.AddTransient<IEmployeeService, EFEmployeeService>();
 builder.Services.AddTransient<IDepartmentService, EFDepartmentService>();
+builder.Services.AddTransient<IPositionService, EFPositionService>();
 
 var app = builder.Build();
 

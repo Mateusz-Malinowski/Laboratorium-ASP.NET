@@ -18,14 +18,13 @@ namespace Laboratorium3___App.Controllers
         [HttpGet]
         public IActionResult GetDepartmentsByName(string? name)
         {
-            return Ok(
-                name is null ?
-                    context.Departments.ToList()
-                :
-                    context.Departments
-                        .Where(department => department.Name.ToUpper().StartsWith(name.ToUpper()))
-                        .ToList()
-            );
+            if (name is null) return Ok(context.Departments.ToList());
+
+            var departmentsMatchingName = context.Departments
+                .Where(department => department.Name.ToUpper().Contains(name.ToUpper()))
+                .ToList();
+
+            return Ok(departmentsMatchingName);
         }
 
         [Route("{id}")]

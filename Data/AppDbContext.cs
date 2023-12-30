@@ -16,6 +16,7 @@ namespace Data
         public DbSet<EmployeeEntity> Employees { get; set; }
         public DbSet<OrganizationEntity> Organizations { get; set; }
         public DbSet<DepartmentEntity> Departments { get; set; }
+        public DbSet<PositionEntity> Positions { get; set; }
 
         private string dbPath { get; set; }
 
@@ -92,21 +93,33 @@ namespace Data
                 .WithMany(department => department.Employees)
                 .HasForeignKey(employee => employee.DepartmentId);
 
+            modelBuilder.Entity<EmployeeEntity>()
+                .HasOne(employee => employee.Position)
+                .WithMany(position => position.Employees)
+                .HasForeignKey(employee => employee.PositionId);
+
             modelBuilder.Entity<DepartmentEntity>().HasData(
-                new DepartmentEntity() { Id = 1, Name = "Kraków Łagiewniki", Description = "Pierwszy oddział" },
-                new DepartmentEntity() { Id = 2, Name = "Warszawa Ursynów", Description = "Największy oddział" }
+                new DepartmentEntity() { Id = 1, Name = "Wrocław Strachowice", Description = "Pierwszy oddział" },
+                new DepartmentEntity() { Id = 2, Name = "Warszawa Powiśle", Description = "Największy oddział" }
+            );
+            
+            modelBuilder.Entity<PositionEntity>().HasData(
+                new PositionEntity() { Id = 1, Name = "Manager", Salary = 150 },
+                new PositionEntity() { Id = 2, Name = "Full-Stack Developer", Salary = 120 },
+                new PositionEntity() { Id = 3, Name = "Front-End Developer", Salary = 100 },
+                new PositionEntity() { Id = 4, Name = "Back-End Developer", Salary = 100 }
             );
 
             modelBuilder.Entity<DepartmentEntity>()
                 .OwnsOne(department => department.Address)
                 .HasData(
-                    new { DepartmentEntityId = 1, City = "Kraków", Street = "Wesoła 90A", PostalCode = "31-150" },
+                    new { DepartmentEntityId = 1, City = "Wrocław", Street = "Wesoła 90A", PostalCode = "31-150" },
                     new { DepartmentEntityId = 2, City = "Warszawa", Street = "Słoneczna 84B", PostalCode = "31-699" }
                 );
 
             modelBuilder.Entity<EmployeeEntity>().HasData(
-                new EmployeeEntity() { EmployeeId = 1, Pesel = "12345678900", Name = "Adam", Surname = "Kowalski", Position = 0, DepartmentId = 1, EmploymentDate = new DateTime(2000, 10, 10), SackingDate = new DateTime(2000, 10, 30), },
-                new EmployeeEntity() { EmployeeId = 2, Pesel = "00987654321", Name = "Ewa", Surname = "Nowak", Position = 1, DepartmentId = 2, EmploymentDate = new DateTime(1999, 8, 10), SackingDate = new DateTime(2003, 8, 9) }
+                new EmployeeEntity() { EmployeeId = 1, Pesel = "12345678900", Name = "Adam", Surname = "Kowalski", PositionId = 1, DepartmentId = 1, EmploymentDate = new DateTime(2000, 10, 10), SackingDate = new DateTime(2000, 10, 30), },
+                new EmployeeEntity() { EmployeeId = 2, Pesel = "00987654321", Name = "Ewa", Surname = "Nowak", PositionId = 2, DepartmentId = 2, EmploymentDate = new DateTime(1999, 8, 10), SackingDate = new DateTime(2003, 8, 9) }
             );
         }
     }

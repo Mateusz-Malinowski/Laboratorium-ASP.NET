@@ -17,7 +17,6 @@ namespace Laboratorium3___Employee.Services
         public int Add(Employee employee)
         {
             var entry = context.Employees.Add(EmployeeMapper.GetEntityFromModel(employee));
-            Console.WriteLine(employee.DepartmentId);
             context.SaveChanges();
             int id = entry.Entity.EmployeeId;
             return id;
@@ -48,11 +47,6 @@ namespace Laboratorium3___Employee.Services
         {
             context.Employees.Update(EmployeeMapper.GetEntityFromModel(employee));
             context.SaveChanges();
-        }
-
-        public List<DepartmentEntity> FindAllDepartments()
-        {
-            return context.Departments.ToList();
         }
     }
 }

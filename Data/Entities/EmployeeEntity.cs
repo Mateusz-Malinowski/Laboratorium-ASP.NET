@@ -27,8 +27,9 @@ namespace Data.Entities
         [MaxLength(80)]
         public string Surname { get; set; }
 
-        [Required]
-        public int Position { get; set; }
+        public PositionEntity Position { get; set; }
+
+        public int PositionId { get; set; }
 
         public DepartmentEntity Department { get; set; }
 

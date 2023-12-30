@@ -15,7 +15,7 @@ namespace Laboratorium3___Employee.Helpers
                 Surname = employee.Surname,
                 EmploymentDate = employee.EmploymentDate,
                 SackingDate = employee.SackingDate,
-                Position = (int)employee.Position,
+                PositionId = employee.PositionId,
                 DepartmentId = employee.DepartmentId
             };
         }
@@ -30,7 +30,7 @@ namespace Laboratorium3___Employee.Helpers
                 Surname = entity.Surname,
                 EmploymentDate = entity.EmploymentDate,
                 SackingDate = entity.SackingDate,
-                Position = (Positions)entity.Position,
+                PositionId = entity.PositionId,
                 DepartmentId = entity.DepartmentId
             };
         }
