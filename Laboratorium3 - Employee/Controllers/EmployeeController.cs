@@ -18,10 +18,10 @@ namespace Laboratorium3___Employee.Controllers
             _positionService = positionService;
         }
 
-        public IActionResult Index()
+        public IActionResult Index(int page = 1, int size = 5)
         {
-            var employees = _employeeService.FindAll();
-            foreach (Employee employee in employees)
+            var employees = _employeeService.FindPage(page, size);
+            foreach (Employee employee in employees.Data)
             {
                 employee.Position = _positionService.FindById(employee.PositionId);
                 employee.Department = _departmentService.FindById(employee.DepartmentId);

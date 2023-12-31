@@ -39,5 +39,10 @@ namespace Laboratorium3___Employee.Services
         {
             throw new NotImplementedException();
         }
+
+        public PagingList<Employee> FindPage(int page, int size)
+        {
+            throw new NotImplementedException();
+        }
     }
 }

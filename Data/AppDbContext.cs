@@ -97,11 +97,6 @@ namespace Data
                 .HasOne(employee => employee.Position)
                 .WithMany(position => position.Employees)
                 .HasForeignKey(employee => employee.PositionId);
-
-            modelBuilder.Entity<DepartmentEntity>().HasData(
-                new DepartmentEntity() { Id = 1, Name = "Wrocław Strachowice", Description = "Pierwszy oddział" },
-                new DepartmentEntity() { Id = 2, Name = "Warszawa Powiśle", Description = "Największy oddział" }
-            );
             
             modelBuilder.Entity<PositionEntity>().HasData(
                 new PositionEntity() { Id = 1, Name = "Manager", Salary = 150 },
@@ -110,11 +105,28 @@ namespace Data
                 new PositionEntity() { Id = 4, Name = "Back-End Developer", Salary = 100 }
             );
 
+            modelBuilder.Entity<DepartmentEntity>().HasData(
+                new DepartmentEntity() { Id = 1, Name = "Wrocław Strachowice", Description = "Pierwszy oddział" },
+                new DepartmentEntity() { Id = 2, Name = "Warszawa Powiśle", Description = "Największy oddział" },
+                new DepartmentEntity() { Id = 3, Name = "Kraków Podgórze", Description = "Jedyny w Małopolsce" },
+                new DepartmentEntity() { Id = 4, Name = "Gdańsk Oliwa", Description = "Nadmorski oddział" },
+                new DepartmentEntity() { Id = 5, Name = "Poznań Jeżyce", Description = "Wielkopolski oddział" },
+                new DepartmentEntity() { Id = 6, Name = "Łódź Bałuty", Description = "Centralny oddział" },
+                new DepartmentEntity() { Id = 7, Name = "Szczecin Pogodno", Description = "Pomorski oddział" },
+                new DepartmentEntity() { Id = 8, Name = "Katowice Ligota", Description = "Śląski oddział" }
+            );
+
             modelBuilder.Entity<DepartmentEntity>()
                 .OwnsOne(department => department.Address)
                 .HasData(
                     new { DepartmentEntityId = 1, City = "Wrocław", Street = "Wesoła 90A", PostalCode = "31-150" },
-                    new { DepartmentEntityId = 2, City = "Warszawa", Street = "Słoneczna 84B", PostalCode = "31-699" }
+                    new { DepartmentEntityId = 2, City = "Warszawa", Street = "Słoneczna 84B", PostalCode = "31-699" },
+                    new { DepartmentEntityId = 3, City = "Kraków", Street = "Deszczowa 21", PostalCode = "32-680" },
+                    new { DepartmentEntityId = 4, City = "Gdańsk", Street = "Słowackiego 12", PostalCode = "80-245" },
+                    new { DepartmentEntityId = 5, City = "Poznań", Street = "Dąbrowskiego 33", PostalCode = "61-538" },
+                    new { DepartmentEntityId = 6, City = "Łódź", Street = "Piotrkowska 65", PostalCode = "90-402" },
+                    new { DepartmentEntityId = 7, City = "Szczecin", Street = "Mickiewicza 7", PostalCode = "70-385" },
+                    new { DepartmentEntityId = 8, City = "Katowice", Street = "Chorzowska 55", PostalCode = "40-101" }
                 );
 
             modelBuilder.Entity<EmployeeEntity>().HasData(
