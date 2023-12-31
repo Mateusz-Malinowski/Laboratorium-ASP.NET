@@ -10,5 +10,6 @@ namespace Laboratorium3___Employee.Services
         void Update(Position position);
         List<Position> FindAll();
         Position? FindById(int id);
+        PagingList<Position> FindPage(int page, int size);
     }
 }

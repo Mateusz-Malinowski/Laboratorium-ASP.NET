@@ -48,5 +48,18 @@ namespace Laboratorium3___Employee.Services
             context.Departments.Update(DepartmentMapper.GetEntityFromModel(employee));
             context.SaveChanges();
         }
+
+        public PagingList<Department> FindPage(int page, int size)
+        {
+            var pagingList = PagingList<Department>.Create(null, context.Departments.Count(), page, size);
+            var data = context.Departments
+                .OrderBy(department => department.Name)
+                .Skip((pagingList.Number - 1) * pagingList.Size)
+                .Take(pagingList.Size)
+                .Select(DepartmentMapper.GetModelFromEntity)
+                .ToList();
+            pagingList.Data = data;
+            return pagingList;
+        }
     }
 }

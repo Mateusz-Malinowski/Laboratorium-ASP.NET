@@ -1,0 +1,15 @@
+﻿@model Department
+@*
+    For more information on enabling MVC for empty projects, visit https://go.microsoft.com/fwlink/?LinkID=397860
+*@
+@{
+}
+
+<h2>Department @Model.Name (id: @Model.Id)</h2>
+<ul>
+    <li><b>@Html.DisplayNameFor(model => model.Description):</b> @Model.Description</li>
+    <li><b>@Html.DisplayNameFor(model => model.Address.City):</b> @Model.Address.City</li>
+    <li><b>@Html.DisplayNameFor(model => model.Address.Street):</b> @Model.Address.Street</li>
+    <li><b>@Html.DisplayNameFor(model => model.Address.PostalCode):</b> @Model.Address.PostalCode</li>
+</ul>
+<a asp-action="Index" class="btn btn-primary">Go back to list</a>

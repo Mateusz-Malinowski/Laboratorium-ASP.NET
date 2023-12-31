@@ -10,5 +10,6 @@ namespace Laboratorium3___Employee.Services
         void Update(Department department);
         List<Department> FindAll();
         Department? FindById(int id);
+        PagingList<Department> FindPage(int page, int size);
     }
 }

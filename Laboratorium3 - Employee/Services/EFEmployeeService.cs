@@ -53,7 +53,7 @@ namespace Laboratorium3___Employee.Services
         {
             var pagingList = PagingList<Employee>.Create(null, context.Employees.Count(), page, size);
             var data = context.Employees
-                .OrderBy(contact => contact.Name)
+                .OrderBy(employee => employee.Name)
                 .Skip((pagingList.Number - 1) * pagingList.Size)
                 .Take(pagingList.Size)
                 .Select(EmployeeMapper.GetModelFromEntity)
