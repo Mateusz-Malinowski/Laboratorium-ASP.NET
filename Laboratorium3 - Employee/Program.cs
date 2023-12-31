@@ -1,5 +1,6 @@
 using Data;
 using Laboratorium3___Employee.Services;
+using Laboratorium3___Employee.Models;
 using Microsoft.AspNetCore.Identity;
 using System.Xml.Linq;
 
@@ -32,6 +33,7 @@ app.UseHttpsRedirection();
 app.UseStaticFiles();
 
 app.UseRouting();
+app.UseMiddleware<LastVisitCookie>();
 
 app.UseAuthentication();
 app.UseAuthorization();
