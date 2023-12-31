@@ -47,8 +47,8 @@ namespace Data
             );
 
             var hash = new PasswordHasher<IdentityUser>();
-            var adminUser = new IdentityUser() { UserName = "adam", NormalizedUserName = "ADAM", Email = "adam@wsei.edu.pl", NormalizedEmail = "ADAM@WSEI.EDU>PL", EmailConfirmed = true, Id = Guid.NewGuid().ToString() };
-            var normalUser = new IdentityUser() { UserName = "marcin", NormalizedUserName = "MARCIN", Email = "marcin@wsei.edu.pl", NormalizedEmail = "MARCIN@WSEI.EDU>PL", EmailConfirmed = true, Id = Guid.NewGuid().ToString() };
+            var adminUser = new IdentityUser() { UserName = "adam", NormalizedUserName = "ADAM", Email = "adam@wsei.edu.pl", NormalizedEmail = "ADAM@WSEI.EDU.PL", EmailConfirmed = true, Id = Guid.NewGuid().ToString() };
+            var normalUser = new IdentityUser() { UserName = "marcin", NormalizedUserName = "MARCIN", Email = "marcin@wsei.edu.pl", NormalizedEmail = "MARCIN@WSEI.EDU.PL", EmailConfirmed = true, Id = Guid.NewGuid().ToString() };
             adminUser.PasswordHash = hash.HashPassword(adminUser, "1234ABCDabcd!@#$");
             normalUser.PasswordHash = hash.HashPassword(normalUser, "1234ABCDabcd!@#$");
 

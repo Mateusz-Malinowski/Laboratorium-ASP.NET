@@ -2,9 +2,12 @@
 using Laboratorium3___Employee.Models;
 using Microsoft.AspNetCore.Mvc.Rendering;
 using Laboratorium3___Employee.Services;
+using Microsoft.AspNetCore.Authorization;
+using System.Data;
 
 namespace Laboratorium3___Employee.Controllers
 {
+    [Authorize(Roles = "admin")]
     public class DepartmentController : Controller
     {
         private readonly IDepartmentService _departmentService;
@@ -14,6 +17,7 @@ namespace Laboratorium3___Employee.Controllers
             _departmentService = departmentService;
         }
 
+        [AllowAnonymous]
         public IActionResult Index(int page = 1, int size = 5)
         {
             return View(_departmentService.FindPage(page, size));

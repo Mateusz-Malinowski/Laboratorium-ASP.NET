@@ -1,14 +1,22 @@
 using Data;
 using Laboratorium3___Employee.Services;
+using Microsoft.AspNetCore.Identity;
+using System.Xml.Linq;
 
 var builder = WebApplication.CreateBuilder(args);
 
 // Add services to the container.
+builder.Services.AddRazorPages();
 builder.Services.AddControllersWithViews();
 builder.Services.AddDbContext<AppDbContext>();
+builder.Services.AddDefaultIdentity<IdentityUser>()
+    .AddRoles<IdentityRole>()
+    .AddEntityFrameworkStores<AppDbContext>();
 builder.Services.AddTransient<IEmployeeService, EFEmployeeService>();
 builder.Services.AddTransient<IDepartmentService, EFDepartmentService>();
 builder.Services.AddTransient<IPositionService, EFPositionService>();
+builder.Services.AddMemoryCache();
+builder.Services.AddSession();
 
 var app = builder.Build();
 
@@ -25,7 +33,10 @@ app.UseStaticFiles();
 
 app.UseRouting();
 
+app.UseAuthentication();
 app.UseAuthorization();
+app.UseSession();
+app.MapRazorPages();
 
 app.MapControllerRoute(
     name: "default",

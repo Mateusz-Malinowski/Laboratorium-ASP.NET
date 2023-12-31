@@ -2,9 +2,11 @@
 using Laboratorium3___Employee.Models;
 using Microsoft.AspNetCore.Mvc.Rendering;
 using Laboratorium3___Employee.Services;
+using Microsoft.AspNetCore.Authorization;
 
 namespace Laboratorium3___Employee.Controllers
 {
+    [Authorize(Roles = "admin")]
     public class EmployeeController : Controller
     {
         private readonly IEmployeeService _employeeService;
@@ -18,6 +20,7 @@ namespace Laboratorium3___Employee.Controllers
             _positionService = positionService;
         }
 
+        [AllowAnonymous]
         public IActionResult Index(int page = 1, int size = 5)
         {
             var employees = _employeeService.FindPage(page, size);
