@@ -14,5 +14,36 @@ html {
 }
 
 body {
-  margin-bottom: 60px;
+    margin-bottom: 60px;
+    background-color: #333;
+    color: #f9f9f9;
+    min-height: 100vh;
+    margin: 0;
+}
+
+footer {
+    position: fixed;
+    width: 100%;
+    bottom: 0;
+    background-color: #222;
+}
+
+a {
+    color: unset;
+}
+
+a:hover {
+    color: unset;
+}
+
+.form-floating {
+    margin-bottom: 15px;
+}
+
+.form-floating label {
+    color: #111;
+}
+
+.nav-pills .nav-link {
+    color: #fefefe;
 }
