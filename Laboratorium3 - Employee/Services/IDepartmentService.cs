@@ -5,7 +5,7 @@ namespace Laboratorium3___Employee.Services
 {
     public interface IDepartmentService
     {
-        int Add(Department department);
+        void Add(Department department);
         void Delete(int id);
         void Update(Department department);
         List<Department> FindAll();

@@ -14,12 +14,10 @@ namespace Laboratorium3___Employee.Services
             this.context = context;
         }
 
-        public int Add(Position position)
+        public void Add(Position position)
         {
-            var entry = context.Positions.Add(PositionMapper.GetEntityFromModel(position));
+            context.Positions.Add(PositionMapper.GetEntityFromModel(position));
             context.SaveChanges();
-            int id = entry.Entity.Id;
-            return id;
         }
 
         public void Delete(int id)

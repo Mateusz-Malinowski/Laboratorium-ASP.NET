@@ -5,7 +5,7 @@ namespace Laboratorium3___Employee.Services
 {
     public interface IPositionService
     {
-        int Add(Position position);
+        void Add(Position position);
         void Delete(int id);
         void Update(Position position);
         List<Position> FindAll();

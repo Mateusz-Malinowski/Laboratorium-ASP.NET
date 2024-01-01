@@ -12,11 +12,11 @@ namespace Data
 {
     public class AppDbContext : IdentityDbContext<IdentityUser>
     {
-        public DbSet<ContactEntity> Contacts { get; set; }
-        public DbSet<EmployeeEntity> Employees { get; set; }
-        public DbSet<OrganizationEntity> Organizations { get; set; }
-        public DbSet<DepartmentEntity> Departments { get; set; }
-        public DbSet<PositionEntity> Positions { get; set; }
+        public virtual DbSet<ContactEntity> Contacts { get; set; }
+        public virtual DbSet<EmployeeEntity> Employees { get; set; }
+        public virtual DbSet<OrganizationEntity> Organizations { get; set; }
+        public virtual DbSet<DepartmentEntity> Departments { get; set; }
+        public virtual DbSet<PositionEntity> Positions { get; set; }
 
         private string dbPath { get; set; }
 
